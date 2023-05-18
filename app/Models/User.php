@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'role',
+        'gender',
+        'address',
+        'phone',
+        'birthdate',
     ];
 
     /**
@@ -41,4 +47,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function transaction(){
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
+    public function shoe(){
+        return $this->hasMany(Shoe::class, 'user_id', "id");
+    }
 }
