@@ -20,12 +20,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 100);
             $table->rememberToken();
-            $table->string('username', 100);
-            $table->integer('role');
-            $table->string('gender', 1);
-            $table->string('address');
-            $table->string('phone', 20);
-            $table->date('birthdate');
+            $table->string('username', 100)->nullable();
+            $table->integer('role')->default(2); // 2 => customer
+            $table->string('gender', 1)->nullable(); // m or f
+            $table->string('address')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->date('birthdate')->nullable();
             $table->timestamps();
         });
     }
