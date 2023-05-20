@@ -19,7 +19,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('shoe_id')->constrained()->nullOnDelete();
+            $table->foreignId('shoe_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('service_id')->constrained();
             $table->timestamps();
         });
