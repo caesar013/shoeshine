@@ -9,6 +9,7 @@
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="{{ route('register')}}" method="POST">
+                @csrf
                 <h1>Create Account</h1>
                 <input type="text" placeholder="Name" name="name">
                 <input type="text" placeholder="Username" name="username">
@@ -19,6 +20,7 @@
         </div>
         <div class="form-container sign-in-container">
             <form action="{{ route('login') }}" method="POST">
+                @csrf
                 <h1>Sign in</h1>
                 <input type="text" placeholder="Username" name="username">
                 <input type="password" placeholder="Password" name="password">
