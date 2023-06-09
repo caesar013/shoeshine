@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>ShoeShine</title>
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 </head>
 

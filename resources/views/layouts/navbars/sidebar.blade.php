@@ -9,47 +9,7 @@
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
             <img src="{{ asset('argon/img/brand/logo.png') }}" class="navbar-brand-img">
         </a>
-        <!-- User -->
-        <ul class="nav align-items-center d-md-none">
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle">
-                            <img alt="Image placeholder" src="{{ asset('argon/img/brand/team-1-800x800.jpg') }}">
-                        </span>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
-                    </div>
-                    <a href="" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
-                        <span>{{ __('My profile') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-settings-gear-65"></i>
-                        <span>{{ __('Settings') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-calendar-grid-58"></i>
-                        <span>{{ __('Activity') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ __('Support') }}</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
-                        <span>{{ __('Logout') }}</span>
-                    </a>
-                </div>
-            </li>
-        </ul>
+
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
             <!-- Collapse header -->
@@ -70,47 +30,36 @@
                     </div>
                 </div>
             </div>
-            <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-                <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended"
-                        placeholder="{{ __('Search') }}" aria-label="Search">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fa fa-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Home') }}
+                    <a class="nav-link {{ ($title === "Home") ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="ni ni-tv-2 text-primary" {{ ($title === "Home") ? 'style="color: #00FF85;"' : '' }}></i>
+                        {{ __('Home') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-briefcase-24" style="color: #00FF85;"></i>
-                        <span class="nav-link-text" style="color: #00FF85;">{{ __('Services') }}</span>
+                    <a class="nav-link {{ ($title === "Services") ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="ni ni-briefcase-24 text-primary" {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}></i>
+                        <span class="nav-link-text " {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}>{{ __('Services') }}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Gallery") ? 'active' : '' }}" href="{{ route('home') }}">
                         <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Testimonials") ? 'active' : '' }}" href="{{ route('home') }}">
                         <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Articles") ? 'active' : '' }}" href="{{ route('home') }}">
                         <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                     </a>
                 </li>
