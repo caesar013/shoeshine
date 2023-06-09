@@ -40,7 +40,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Services") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Services") ? 'active' : '' }}" href="{{ route('service.index') }}">
                         <i class="ni ni-briefcase-24 text-primary" {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}></i>
                         <span class="nav-link-text " {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}>{{ __('Services') }}</span>
                     </a>
