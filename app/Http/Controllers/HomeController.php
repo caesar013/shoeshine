@@ -27,4 +27,16 @@ class HomeController extends Controller
             'title' => 'Home'
         ]);
     }
+
+    public function gallery(){
+        return view('gallery', [
+            'title' => 'Gallery'
+        ]);
+    }
+
+    public function article(){
+        return view('article', [
+            'title' => 'Article'
+        ]);
+    }
 }
