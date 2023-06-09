@@ -6,8 +6,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon/img/brand/logo.png') }}" class="navbar-brand-img">
+        <a class="navbar-brand pt-0 pb-0 " style="height: 100px; width: auto;" href="{{ route('home') }}">
+            <img src="{{ asset('argon/img/brand/logo.png') }}" class="navbar-brand-img " style="max-height: 100%; max-width: 100%;">
         </a>
 
         <!-- Collapse -->
