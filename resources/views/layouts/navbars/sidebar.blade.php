@@ -47,7 +47,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Gallery") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Gallery") ? 'active' : '' }}" href="{{ route('gallery') }}">
                         <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
                     </a>
                 </li>
@@ -59,7 +59,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Articles") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($title === "Articles") ? 'active' : '' }}" href="{{ route('article') }}">
                         <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                     </a>
                 </li>

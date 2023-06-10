@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function article(){
         return view('article', [
-            'title' => 'Article'
+            'title' => 'Articles'
         ]);
     }
 }

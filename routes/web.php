@@ -50,7 +50,7 @@ Route::get('/', function(){
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/article', [HomeController::class, 'index'])->name('article');
+Route::get('/article', [HomeController::class, 'article'])->name('article');
 
 Route::get('/service', [ServiceController::class, 'index'])->name('service.index');
 
