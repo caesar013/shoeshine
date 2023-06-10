@@ -15,6 +15,12 @@ class Order extends Model
         'service_id',
     ];
 
+    protected $with = [
+        'shoe',
+        'transaction',
+        'service'
+    ];
+
     public function shoe(){
         return $this->belongsTo(Shoe::class, 'shoe_id'. 'id');
     }

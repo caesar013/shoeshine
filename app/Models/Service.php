@@ -14,6 +14,10 @@ class Service extends Model
         'price',
     ];
 
+    protected $with = [
+        'order'
+    ];
+
     public function order(){
         return $this->hasMany(Order::class, 'service_id', 'id');
     }

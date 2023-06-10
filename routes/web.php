@@ -5,7 +5,6 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\TransactionController;
-use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/logout', function(){
-    abort(403);
+    abort(403, 'You are Unauthenticated');
 });
 
 Route::middleware('auth')->group(function(){
