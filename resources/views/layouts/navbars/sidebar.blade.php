@@ -33,33 +33,33 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Home") ? 'active' : '' }}" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary" {{ ($title === "Home") ? 'style="color: #00FF85;"' : '' }}></i>
+                    <a class="nav-link {{ ($active === "home") ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="ni ni-tv-2 text-primary"></i>
                         {{ __('Home') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Services") ? 'active' : '' }}" href="{{ route('service.index') }}">
-                        <i class="ni ni-briefcase-24 text-primary" {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}></i>
-                        <span class="nav-link-text " {{ ($title === "Services") ? 'style="color: #00FF85;"' : '' }}>{{ __('Services') }}</span>
+                    <a class="nav-link {{ ($active === "services") ? 'active' : '' }}" href="{{ route('service.index') }}">
+                        <i class="ni ni-briefcase-24" ></i>
+                        {{ __('Services') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Gallery") ? 'active' : '' }}" href="{{ route('gallery') }}">
+                    <a class="nav-link {{ ($active === "gallery") ? 'active' : '' }}" href="{{ route('gallery') }}">
                         <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Testimonials") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ ($active === "testimonials") ? 'active' : '' }}" href="{{ route('home') }}">
                         <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "Articles") ? 'active' : '' }}" href="{{ route('article') }}">
+                    <a class="nav-link {{ ($active === "articles") ? 'active' : '' }}" href="{{ route('article') }}">
                         <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                     </a>
                 </li>
