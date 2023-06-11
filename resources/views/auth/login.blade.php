@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>ShoeShine</title>
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
@@ -9,22 +10,28 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="{{ route('register')}}" method="POST">
+            <form action="{{ url('/register') }}" method="POST">
                 @csrf
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name" name="name">
-                <input type="text" placeholder="Username" name="username">
-                <input type="password" placeholder="Password" name="password">
-                <input type="password" placeholder="Confirm Password" name="password_confirmation">
+                <input type="text" placeholder="Name" name="name" required value="{{ old('name') }}">
+                <input type="text" placeholder="Username" name="username" required value="{{ old('name') }}">
+                <input type="password" placeholder="Password" name="password" required>
+                <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
             <form action="{{ route('login') }}" method="POST">
                 @csrf
+                @if (session('success'))
+                    <div class="alert alert-success " role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <h1>Sign in</h1>
-                <input type="text" placeholder="Username" name="username">
-                <input type="password" placeholder="Password" name="password">
+                <input type="text" placeholder="Username" name="username" class="form-control" autofocus required
+                    value="{{ old('name') }}">
+                <input type="password" placeholder="Password" name="password" class="form-control" required>
                 <a href="">Forgot your password?</a>
                 <button type="submit">Sign In</button>
             </form>
