@@ -15,8 +15,7 @@ class ServiceController extends Controller
     public function index()
     {
         return view('service', [
-            'title' => 'Services',
-            'active' => 'services'
+            'title' => 'Services'
         ]);
     }
 

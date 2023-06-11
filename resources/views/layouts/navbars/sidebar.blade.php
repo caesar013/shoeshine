@@ -33,33 +33,33 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ ($active === "home") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i>
                         {{ __('Home') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($active === "services") ? 'active' : '' }}" href="{{ route('service.index') }}">
-                        <i class="ni ni-briefcase-24" ></i>
+                    <a class="nav-link {{ Request::is('service') ? 'active' : '' }}" href="{{ route('service.index') }}">
+                        <i class="ni ni-briefcase-24 text-primary" ></i>
                         {{ __('Services') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($active === "gallery") ? 'active' : '' }}" href="{{ route('gallery') }}">
+                    <a class="nav-link {{ Request::is('home/gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
                         <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($active === "testimonials") ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ Request::is('home/testimony') ? 'active' : '' }}" href="">
                         <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ ($active === "articles") ? 'active' : '' }}" href="{{ route('article') }}">
+                    <a class="nav-link {{ Request::is('home/article') ? 'active' : '' }}" href="{{ route('article') }}">
                         <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                     </a>
                 </li>

@@ -15,8 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         return view('order', [
-            'title' => 'Order',
-            'active' => 'order'
+            'title' => 'Order'
         ]);
     }
 

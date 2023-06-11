@@ -15,8 +15,7 @@ class ShoeController extends Controller
     public function index()
     {
         return view('shoe', [
-            'title' => 'Shoe',
-            'active' => 'shoe'
+            'title' => 'Shoe'
         ]);
     }
 

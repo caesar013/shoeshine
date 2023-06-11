@@ -24,22 +24,19 @@ class HomeController extends Controller
     public function index()
     {
         return view('dashboard', [
-            'title' => 'Home',
-            'active' => 'home'
+            'title' => 'Home'
         ]);
     }
 
     public function gallery(){
         return view('gallery', [
-            'title' => 'Gallery',
-            'active' => 'gallery'
+            'title' => 'Gallery'
         ]);
     }
 
     public function article(){
         return view('article', [
-            'title' => 'Articles',
-            'active' => 'articles'
+            'title' => 'Articles'
         ]);
     }
 }
