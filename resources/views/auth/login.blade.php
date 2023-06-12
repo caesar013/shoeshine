@@ -10,7 +10,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="{{ url('/register') }}" method="POST">
+            <form action="{{ route('guest.register') }}" method="POST">
                 @csrf
                 <h1>Create Account</h1>
                 <input type="text" placeholder="Name" name="name" required value="{{ old('name') }}">
@@ -21,14 +21,12 @@
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('guest.login') }}" method="POST">
                 @csrf
+                <h1 class="m-3">Sign in</h1>
                 @if (session('success'))
-                    <div class="alert alert-success " role="alert">
-                        {{ session('success') }}
-                    </div>
+                        <p class="m-1">{{ session('success') }} </p>
                 @endif
-                <h1>Sign in</h1>
                 <input type="text" placeholder="Username" name="username" class="form-control" autofocus required
                     value="{{ old('name') }}">
                 <input type="password" placeholder="Password" name="password" class="form-control" required>

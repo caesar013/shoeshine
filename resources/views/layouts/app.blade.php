@@ -18,10 +18,7 @@
     <!-- Icons -->
     <link href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" rel="stylesheet">
     <link href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon/css/argon.css?v=1.0.0') }}" rel="stylesheet">
 </head>
@@ -45,20 +42,6 @@
 
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.0.0') }}"></script>
