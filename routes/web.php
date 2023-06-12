@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/article', [HomeController::class, 'showArticle'])->name('article');
 
-Route::get('/service', [ServiceController::class, 'showGuestIndex'])->name('service.index');
+Route::get('/service', [ServiceController::class, 'showService'])->name('service.showService');
 
 Route::get('/gallery', [HomeController::class, 'showGallery'])->name('gallery');
 
@@ -43,7 +43,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function(){
 

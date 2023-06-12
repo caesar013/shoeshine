@@ -10,7 +10,7 @@
 
     <title>ShoeShine | {{ $title }}</title>
     <!-- Favicon -->
-    <link href="{{ asset('argon/img/brand/favicon.png') }}" rel="icon" type="image/png">
+    <link href="{{ asset('argon/img/brand/logo.png') }}" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Extra details for Live View on GitHub Pages -->
@@ -25,7 +25,7 @@
 
 <body class="{{ $class ?? '' }}">
     @auth()
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
         @include('layouts.navbars.sidebar')
