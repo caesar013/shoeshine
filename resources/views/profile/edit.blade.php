@@ -2,8 +2,8 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Hello') . ' '. auth()->user()->name,
-        'description' => __('This is your profile page. You can see the progress you\'ve made with your work and manage your projects or assigned tasks'),
+        'title' => __('Hello') . ', '. auth()->user()->name,
+        'description' => __('This is your profile page. You can see your personal information, update that information, and also change your password here.'),
         'class' => 'col-lg-7'
     ])   
 
@@ -69,11 +69,11 @@
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
-                            <h3 class="mb-0">{{ __('Edit Profile') }}</h3>
+                            <h3 class="mb-0 ml-3">{{ __('Edit Profile') }}</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
+                        <form method="post" action="" autocomplete="off">
                             @csrf
                             @method('put')
 
@@ -117,7 +117,7 @@
                             </div>
                         </form>
                         <hr class="my-4" />
-                        <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
+                        <form method="post" action="" autocomplete="off">
                             @csrf
                             @method('put')
 

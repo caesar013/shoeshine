@@ -60,4 +60,9 @@ class User extends Authenticatable
     public function shoe(){
         return $this->hasMany(Shoe::class, 'user_id', "id");
     }
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }

@@ -7,7 +7,6 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\TransactionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +19,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+// Auth::routes();
 
 
-Route::middleware('auth')->group(function(){
+Route::get('/article', [HomeController::class, 'showArticle'])->name('article');
+
+Route::get('/service', [ServiceController::class, 'showService'])->name('service.showService');
+
+Route::get('/gallery', [HomeController::class, 'showGallery'])->name('gallery');
+
+Route::get('/', fn()=>redirect()->route('guest.home'));
+
+
+Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function(){
 
     Route::resource('/order', OrderController::class);
 
@@ -31,12 +39,13 @@ Route::middleware('auth')->group(function(){
 
     Route::resource('/transaction', TransactionController::class);
 
-
-    Route::get('/service', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/service', [ServiceController::class, 'index'])->name('service.display');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::middleware('isAdmin')->group(function(){
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function(){
 
         Route::resource('/service', ServiceController::class);
 
@@ -45,31 +54,22 @@ Route::middleware('auth')->group(function(){
 
 
 
-Route::middleware('guest')->group(function(){
+Route::middleware('guest')->prefix('home')->name('guest.')->group(function(){
 
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('/', [HomeController::class, 'showGuestIndex'])->name('home'); // localhost/home
+
+
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
     Route::get('/logout', function(){
         abort(403, 'You are Unauthenticated');
-    });
-
-    Route::get('/', function(){
-        return redirect()->route('login')->with('title', 'Login');
-    });
+    })->name('logout');
 
 });
 
 
 // we'll later utilize except option on the resource route in order to exculde the unauthorized action.
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::get('/home/article', [HomeController::class, 'article'])->name('article');
-
-Route::get('/service', [ServiceController::class, 'index'])->name('service.index');
-
-Route::get('/home/gallery', [HomeController::class, 'gallery'])->name('gallery');
