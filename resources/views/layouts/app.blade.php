@@ -28,17 +28,14 @@
         <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        @include('layouts.navbars.sidebar')
     @endauth
+    @include('layouts.navbars.sidebar')
 
     <div class="main-content">
         @include('layouts.navbars.navbar')
         @yield('content')
+        @include('layouts.footers.nav')
     </div>
-
-    @guest()
-        @include('layouts.footers.guest')
-    @endguest
 
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -49,7 +46,7 @@
     <script>
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': '{{csrf_token()}}'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
     </script>

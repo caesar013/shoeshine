@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('guest.home') }}">
-                            <img src="{{ asset('argon/img/brand/blue.png') }}">
+                            <img src="{{ asset('argon/img/brand/logo.png') }}">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('guest.register') }}">
+                    <a class="nav-link nav-link-icon" href="{{ route('guest.login') }}">
                         <i class="ni ni-circle-08"></i>
                         <span class="nav-link-inner--text">{{ __('Register') }}</span>
                     </a>

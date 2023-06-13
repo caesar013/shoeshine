@@ -9,6 +9,7 @@
                 <table class="table align-items-center table-dark">
                     <thead class="thead-dark">
                         <tr>
+                            <th scope="col" class="sort" data-sort="index">No.</th>
                             <th scope="col" class="sort" data-sort="shoe">Shoe</th>
                             <th scope="col" class="sort" data-sort="service">Service</th>
                             <th scope="col" class="sort" data-sort="arrived">Arrived</th>
@@ -17,32 +18,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($trans->count() > 0)
-                            @foreach ($trans as $t)
-                                <tr>
-                                    <td>{{ $t-> }}</td>
-                                    <td>{{ $t-> }}</td>
-                                    <td>{{ $t-> }}</td>
-                                    <td>{{ $t-> }}</td>
-                                    <td>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
+                        @forelse ($transactions as $transaction_foo => $transaction_bar)
                             <tr>
-                                <td class="text-center" colspan="4">
-                                    Data tidak ada
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $transaction_bar->order->shoe->image }}</td>
+                                <td>{{ $transaction_bar->order->service->name }}</td>
+                                <td>{{ $transaction_bar->arrived }}</td>
+                                <td>
+                                    {{-- buttons --}}
                                 </td>
                             </tr>
-                        @endif
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Data tidak ada</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-
-        @include('layouts.footers.auth')
     </div>
 @endsection
 

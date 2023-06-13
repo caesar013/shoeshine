@@ -9,7 +9,7 @@
                 <table class="table align-items-center table-dark">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col" class="sort" data-sort="user_id">ID</th>
+                            <th scope="col" class="sort" data-sort="">No.</th>
                             <th scope="col" class="sort" data-sort="material">Material</th>
                             <th scope="col" class="sort" data-sort="color">Color</th>
                             <th scope="col" class="sort" data-sort="model">Model</th>
@@ -17,32 +17,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($shoe->count() > 0)
-                            @foreach ($shoe as $s)
-                                <tr>
-                                    <td>{{ $s->user->user_id }}</td>
-                                    <td>{{ $s->material }}</td>
-                                    <td>{{ $s->color }}</td>
-                                    <td>{{ $s->model }}</td>
-                                    <td>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
+                        @forelse ($shoes as $shoe_foo => $shoe_bar)
                             <tr>
-                                <td class="text-center" colspan="4">
-                                    Data tidak ada
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $shoe_bar->material }}</td>
+                                <td>{{ $shoe_bar->color }}</td>
+                                <td>{{ $shoe_bar->model }}</td>
+                                <td>
+                                    {{-- buttons --}}
                                 </td>
                             </tr>
-                        @endif
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Data tidak ada</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-
-        @include('layouts.footers.auth')
     </div>
 @endsection
 
