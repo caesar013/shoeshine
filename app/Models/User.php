@@ -48,21 +48,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = [
-        'transaction',
-        'shoe',
-    ];
-
     public function transaction(){
         return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 
     public function shoe(){
         return $this->hasMany(Shoe::class, 'user_id', "id");
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'username';
     }
 }
