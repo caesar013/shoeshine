@@ -11,13 +11,32 @@
                         <tr>
                             <th scope="col" class="sort" data-sort="shoe">Shoe</th>
                             <th scope="col" class="sort" data-sort="service">Service</th>
-                            <th scope="col" class="sort" data-sort="arrive">Arrive</th>
+                            <th scope="col" class="sort" data-sort="arrived">Arrived</th>
                             <th scope="col" class="sort" data-sort="status">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @if ($trans->count() > 0)
+                            @foreach ($trans as $t)
+                                <tr>
+                                    <td>{{ $t-> }}</td>
+                                    <td>{{ $t-> }}</td>
+                                    <td>{{ $t-> }}</td>
+                                    <td>{{ $t-> }}</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td class="text-center" colspan="4">
+                                    Data tidak ada
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
