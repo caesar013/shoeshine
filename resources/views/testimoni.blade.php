@@ -2,6 +2,8 @@
 <style>
 body {
 	font-family: "Open Sans", sans-serif;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .h2 {
 	color: #000;
@@ -115,10 +117,9 @@ body {
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/1.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+											<p>"Aku, punya sepatu kulit yang harganya mahal banget. Makanya, aku butuh yang ahli buat rawat sepatu kulit aku itu. Tapi untungnya ada Shoe Shine. Mereka bener-bener jago dalam rawat sepatu kulit dan bikin sepatuku tetap kinclong. Pelayanannya top banget deh! nggak ragu rekomen Shoe Shine ke temen dan keluarga."</p>
 											<p class="overview"><b>Paula Wilson</b>, Media Analyst</p>
 										</div>
 									</div>
@@ -126,10 +127,9 @@ body {
 							</div>
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/2.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+											<p>"aku, sering banget sepatu kerjaku kena tumpahan dan noda. Tapi Shoe Shine ini bener-bener penyelamat deh buat sepatu-sepatu aku. Pelayanannya cepet dan efisien banget, bisa bikin sepatu aku balik kayak baru lagi. aku banget yang udah jatuh hati sama bantuan mereka buat jaga penampilanku yang profesional."</p>
 											<p class="overview"><b>Antonio Moreno</b>, Web Developer</p>
 										</div>
 									</div>
@@ -141,10 +141,9 @@ body {
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/3.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+											<p>"aku, suka banget sama sepatu putih. Makanya aku butuh Shoe Shine buat jagain sepatu ku biar tetap bersih dan kinclong. Pelayanannya yang terjangkau dan hasilnya yang memuaskan bikin aku puas dan nyaman banget. Pastinya bakal pake Shoe Shine lagi deh ke depannya."</p>
 											<p class="overview"><b>Michael Holz</b>, Seo Analyst</p>
 										</div>
 									</div>
@@ -152,10 +151,9 @@ body {
 							</div>
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/4.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+											<p>"Aku, tuh seneng banget deh nemuin Shoe Shine. aku mahasiswa aktif, jadi butuh solusi praktis buat jaga sepatu sneakers aku. Nah, Shoe Shine ini bener-bener cocok buat aku. Pelayanannya cepet dan hasilnya memuaskan banget. Makasih ya, Shoe Shine!"</p>
 											<p class="overview"><b>Mary Saveley</b>, Web Designer</p>
 										</div>
 									</div>
@@ -167,10 +165,9 @@ body {
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/5.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+											<p>"Wah, Shoe Shine beneran jago banget deh! Gue, dari Jakarta, cuci sepatu di sana rasanya nggak nyesel. Sepatu-sepatu gue yang tadinya kotor dan kusam, sekarang keliatan kinclong lagi! Pelayanannya juga cepet dan memuaskan. Thanks banget, Shoe Shine!"</p>
 											<p class="overview"><b>Martin Sommer</b>, UX Analyst</p>
 										</div>
 									</div>
@@ -178,10 +175,9 @@ body {
 							</div>
 							<div class="col-sm-6">
 								<div class="media">
-									<img src="/examples/images/clients/6.jpg" class="mr-3" alt="">
 									<div class="media-body">
 										<div class="testimonial">
-											<p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+											<p>"Saya sangat senang dengan layanan Shoe Shine. Mereka menjemput sepatu saya tepat waktu dan mengembalikannya dalam kondisi yang luar biasa. Sepatu-sepatu saya terlihat seperti baru setelah dicuci dan dirawat dengan hati-hati. Pelayanan pelanggan yang ramah dan harga yang terjangkau membuat saya menjadi pelanggan setia Shoe Shine."</p>
 											<p class="overview"><b>John Williams</b>, Web Developer</p>
 										</div>
 									</div>
