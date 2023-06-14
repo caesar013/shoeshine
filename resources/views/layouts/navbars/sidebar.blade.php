@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('home/testimony') ? 'active' : '' }}" href="">
+                    <a class="nav-link {{ Request::is('home/testimony') ? 'active' : '' }}" href="/testimoni">
                         <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                     </a>
                 </li>

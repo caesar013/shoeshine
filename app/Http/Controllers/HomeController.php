@@ -46,4 +46,10 @@ class HomeController extends Controller
             'title' => 'Welcome'
         ]);
     }
+
+    public function showTestimoni(){
+        return view('testimoni', [
+            'title' => 'Testimoni'
+        ]);
+    }
 }

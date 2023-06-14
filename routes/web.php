@@ -71,5 +71,5 @@ Route::middleware('guest')->prefix('home')->name('guest.')->group(function(){
 
 });
 
-
+Route::get('/testimoni',[HomeController::class, 'showTestimoni'])->name('testimoni');
 // we'll later utilize except option on the resource route in order to exculde the unauthorized action.
