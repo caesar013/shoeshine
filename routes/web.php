@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::routes();
 
 
-Route::get('/article', [HomeController::class, 'showArticle'])->name('article');
+Route::get('/article', [HomeController::class, 'article'])->name('article');
+Route::get('/article/{id}', [HomeController::class, 'showArticle']);
 
 Route::get('/service', [ServiceController::class, 'showService'])->name('service.showService');
 
@@ -70,6 +70,6 @@ Route::middleware('guest')->prefix('home')->name('guest.')->group(function(){
     })->name('logout');
 
 });
-
+//Ini masih diluar middleware tolong tambahin ke grouping route yang pas
 Route::get('/testimoni',[HomeController::class, 'showTestimoni'])->name('testimoni');
 // we'll later utilize except option on the resource route in order to exculde the unauthorized action.

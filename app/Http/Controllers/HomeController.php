@@ -52,4 +52,11 @@ class HomeController extends Controller
             'title' => 'Testimoni'
         ]);
     }
+
+    public function showArticle($id){
+        $article = 'article'.$id;
+        return view($article, [
+            'title' => 'Article '.$id
+        ]);
+    }
 }
