@@ -18,7 +18,8 @@ class ValidateAdmin
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check() || Auth::getUser()->role != 1) {
-            abort(401, 'You are Unauthorized');
+            session()->flash('error', 'You are Unauthorized');
+            return redirect()->route('dashboard.home');
         }
         return $next($request);
     }
