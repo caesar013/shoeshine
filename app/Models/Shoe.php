@@ -15,6 +15,7 @@ class Shoe extends Model
         'color',
         'model',
         'image',
+        'brand',
     ];
 
     public function user(){
