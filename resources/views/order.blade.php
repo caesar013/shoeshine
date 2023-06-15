@@ -16,11 +16,16 @@
         <br><br>
 
         <div class="card bg-gradient-secondary shadow">
-            <form>
+            <form method="POST" action="{{ route('dashboard.order.store', Auth::getUser()->id) }}">
+                @csrf
                 <div class="form-group">
-                    <label for="example-text-input" class="form-control-label ml-3 mt-3">Shoe</label>
-                    <select class="form-control ml-3" type="text" value="John Snow" id="example-text-input" style="width: 1158px">
-                        <option value="1">qw</option>
+                    <label for="shoe" class="form-control-label ml-3 mt-3">Shoe</label>
+                    <select class="form-control ml-3" type="text" value="John Snow" id="shoe" style="width: 1158px">
+                        @forelse ($shoes as $shoe_foo => $shoe_bar)
+                            <option value="{{ $shoe_bar->id }}">{{ $shoe_bar-> }}</option>
+                        @empty
+                            <option value="">NO SHOES. PLEASE INPUT FIRST</option>
+                        @endforelse
                     </select>
                 </div>
                 <div class="form-group">

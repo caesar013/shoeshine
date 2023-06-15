@@ -60,8 +60,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/order') ? 'active' : '' }}"
-                            href="{{ route('dashboard.order.index') }}">
+                        <a class="nav-link {{ Request::is('dashboard/order*') ? 'active' : '' }}"
+                            href="{{ route('dashboard.order.create') }}">
                             <i class="ni ni-delivery-fast text-primary"></i>
                             {{ __('Order') }}
                         </a>
@@ -74,13 +74,13 @@
                     </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('home/testimony') ? 'active' : '' }}" href="/testimoni">
+                    <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="/testimoni">
                         <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                     </a>
                 </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('home/article') ? 'active' : '' }}"
+                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}"
                             href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
@@ -112,13 +112,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('home/testimony') ? 'active' : '' }}" href="">
+                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="">
                             <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('home/article') ? 'active' : '' }}"
+                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}"
                             href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
