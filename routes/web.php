@@ -22,9 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/article', [HomeController::class, 'article'])->name('article');
-Route::get('/article/{id}', [HomeController::class, 'showArticle']);
+
+Route::get('/article/{id}', [HomeController::class, 'showArticle'])->name('showArticle');
 
 Route::get('/service', [ServiceController::class, 'showService'])->name('service.showService');
+
+Route::get('/testimoni',[HomeController::class, 'showTestimony'])->name('testimoni');
 
 Route::get('/gallery', [HomeController::class, 'showGallery'])->name('gallery');
 
@@ -39,13 +42,15 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::resource('/transaction', TransactionController::class);
 
-    Route::get('/service', [ServiceController::class, 'index'])->name('service.display');
-
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    Route::resource('/profile', UserController::class);
+
     Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function(){
+
+        Route::get('/home', [HomeController::class, 'showAdminIndex'])->name('home');
 
         Route::resource('/service', ServiceController::class);
 
@@ -70,6 +75,4 @@ Route::middleware('guest')->prefix('home')->name('guest.')->group(function(){
     })->name('logout');
 
 });
-//Ini masih diluar middleware tolong tambahin ke grouping route yang pas
-Route::get('/testimoni',[HomeController::class, 'showTestimoni'])->name('testimoni');
 // we'll later utilize except option on the resource route in order to exculde the unauthorized action.

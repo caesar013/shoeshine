@@ -35,28 +35,35 @@ class HomeController extends Controller
     }
 
     public function article(){
-        return view('article', [
+        return view('articles.article', [
             'title' => 'Articles'
         ]);
     }
 
-    public function showGuestHome()
+    public function showGuestIndex()
     {
-        return view('welcome', [
+        return view('dashboard', [
             'title' => 'Welcome'
         ]);
     }
 
-    public function showTestimoni(){
+    public function showTestimony(){
         return view('testimoni', [
             'title' => 'Testimoni'
         ]);
     }
 
     public function showArticle($id){
-        $article = 'article'.$id;
+        $article = 'articles.article'.$id;
         return view($article, [
             'title' => 'Article '.$id
+        ]);
+    }
+
+    public function showAdminIndex()
+    {
+        return view('dashboard', [
+            'title' => 'Home Admin'
         ]);
     }
 }
