@@ -82,7 +82,7 @@ footer a{color: #ccc;}
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card bg-gradient-default shadow">
                     <div class="card-body pb-3">
-                        <h2 style="color: white" class="text-decoration-none">Hello, {{ auth()->user()->name }}</h2>
+                        <h2 style="color: white" class="text-decoration-none">Articles.</h2>
                     </div>
                 </div>
             </div>

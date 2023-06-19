@@ -1,5 +1,5 @@
-<div class="row align-items-center justify-content-end">
-    <div class="col-sm-7 col-lg-7">
+<div class="row align-items-center justify-content-end mt-5 mb-4">
+    <div class="col-sm-9 col-lg-9">
         <div class="copyright text-left text-sm-left text-lg-left text-muted">
             &copy; {{ now()->year }}
             <a href="https://github.com/caesar013/shoeshine" class="font-weight-bold ml-1" target="_blank">3rd Team |
