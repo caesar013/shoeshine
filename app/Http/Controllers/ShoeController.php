@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Shoe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ShoeController extends Controller
@@ -18,8 +17,7 @@ class ShoeController extends Controller
     public function index()
     {
         return view('shoe', [
-            'title' => 'Shoe',
-            'shoes' => Shoe::where(Auth::getUser()->id)->get()
+            'title' => 'Shoe'
         ]);
     }
 
@@ -41,7 +39,9 @@ class ShoeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['user_id' => Auth::getUser()->id]);
         $rules = [
+            'user_id' => 'exists:users,id',
             'material' => 'required|string|max:50',
             'color' => 'required|string|max:50',
             'model' => 'required|string|max:50',
@@ -52,25 +52,14 @@ class ShoeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'modal_close' => false,
-                'message' => 'Data gagal ditambahkan. ' . $validator->errors()->first(),
-                'data' => $validator->errors()
+                'errors' => $validator->messages()
             ]);
         } else {
-            $transaction_id = DB::table('shoes')->insertGetId([
-                'user_id' => Auth::id()
-            ]);
-            $s = Shoe::create([
-                'shoe_id' => $request->input('shoe_id'),
-                'service_id' => $request->input('service_id'),
-                'transaction_id' => $transaction_id
-            ]);
-
+            $s = Shoe::create($validator->validated());
             return response()->json([
-                'status' => ($s),
-                'modal_close' => false,
-                'message' => ($s) ? 'Shoes added successfully' : 'Failed',
-                'data' => null
+                'status' => true,
+                'shoe' => $validator->validated(),
+                'message' =>($s) ? 'Shoes added successfully':'Failed'
             ]);
         }
     }
@@ -103,9 +92,7 @@ class ShoeController extends Controller
         } else {
             return response()->json([
                 'status' => false,
-                'modal_close' => false,
-                'message' => 'Shoes not Found',
-                'data' => null
+                'message' => 'Shoes not Found'
             ]);
         }
     }
@@ -120,6 +107,7 @@ class ShoeController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
+            'id' => 'unique:shoes,id,' . $id,
             'material' => 'required|string|max:50',
             'color' => 'required|string|max:50',
             'model' => 'required|string|max:50',
@@ -130,11 +118,25 @@ class ShoeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'modal_close' => false,
-                'message' => 'Data gagal diedit. ' . $validator->errors()->first(),
-                'data' => $validator->errors()
+                'error' => $validator->messages()
             ]);
         } else {
+            $s = Shoe::find($id);
+
+            if($s){
+                $s->update($validator->validated());
+
+                return response()->json([
+                    'status' => true,
+                    'message' => ($s) ? 'Data updated successfully' : 'Failed'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => "Shoes not found"
+                ]);
+            }
+
         }
     }
 
@@ -144,14 +146,30 @@ class ShoeController extends Controller
      * @param  \App\Models\shoe  $shoe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(shoe $shoe)
+    public function destroy($id)
     {
-        //
+        $s = Shoe::where('id','=',$id)->first();
+        if ($s) {
+            $s->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data removed successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'error' => 'Shoes not Found'
+            ]);
+        }
+
+
+
     }
 
-    public function fetchData($user_id)
+    public function fetchData()
     {
-        $shoes = Shoe::where('user_id', $user_id)->get();
+        $shoes = Shoe::where('user_id', Auth::getUser()->id)->get();
         return response()->json([
             'shoes' => $shoes
         ]);
