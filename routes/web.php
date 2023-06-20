@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,7 @@ Route::get('/article/{id}', [HomeController::class, 'showArticle'])->name('showA
 
 Route::get('/service', [ServiceController::class, 'showService'])->name('service.showService');
 
-Route::get('/testimoni',[HomeController::class, 'showTestimony'])->name('testimoni');
-
-Route::get('/gallery', [HomeController::class, 'showGallery'])->name('gallery');
+Route::get('/testimony',[HomeController::class, 'showTestimony'])->name('testimony');
 
 Route::get('/', fn()=>redirect()->route('guest.home'));
 
@@ -47,6 +46,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resource('/profile', UserController::class);
+
+    Route::get('/shoes/data', [ShoeController::class, 'fetchData'])->name('fetchDataShoes');
 
     Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function(){
 

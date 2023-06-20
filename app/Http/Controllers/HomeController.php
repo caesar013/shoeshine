@@ -28,7 +28,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function gallery(){
+    public function showGallery(){
         return view('gallery', [
             'title' => 'Gallery'
         ]);
