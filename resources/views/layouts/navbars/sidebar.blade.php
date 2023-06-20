@@ -60,6 +60,14 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link {{ Request::is('dashboard/shoe*') ? 'active' : '' }}"
+                            href="{{ route('dashboard.shoe.index') }}">
+                            <i class="ni ni-ui-04 text-primary"></i>
+                            {{ __('Shoes') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link {{ Request::is('dashboard/order*') ? 'active' : '' }}"
                             href="{{ route('dashboard.order.create') }}">
                             <i class="ni ni-delivery-fast text-primary"></i>
@@ -68,20 +76,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
-                            <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
+                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="{{ route('testimony') }}">
+                            <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="/testimoni">
-                        <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
-                    </a>
-                </li>
-
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}"
-                            href="{{ route('article') }}">
+                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
                     </li>
@@ -106,20 +107,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
-                            <i class="ni ni-album-2 text-primary"></i> {{ __('Gallery') }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="">
                             <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}"
-                            href="{{ route('article') }}">
+                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
                     </li>
