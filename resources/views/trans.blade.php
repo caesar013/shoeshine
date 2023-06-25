@@ -37,14 +37,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="content_modal">
 
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="closeModal('modal_show_order')">Close</button>
-                    <button type="button" class="btn btn-primary proceed_delete_shoe">Yes, delete</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="closeModal('modal_show_order')">OK</button>
                 </div>
             </div>
         </div>
@@ -100,25 +97,27 @@
             $(document).on('click', '.info_btn', function(e) {
                 e.preventDefault();
                 var order_id = $(this).attr('data-order_id');
-                var transaction_id = $(this).attr('data-transaction_id');
                 $.ajax({
                     type: "GET",
-                    url: "/dashboard/transaction/orderData/" + transaction_id + "/" + order_id,
+                    url: "/dashboard/transaction/orderData/" +  order_id,
                     dataType: "json",
                     success: function(data) {
-                        console.log(data);
                         $('#modal_show_orderLabel').text('Detail Order');
-                        $('.content_modal').html('');
-                        // $('.content_modal').append(
-                        //     `
-                        //     <label for="">Shoe</label>
-                        //     <span>`+bar.shoe+`</span>
-                        //     <label for="">Service</label>
-                        //     <span></span>
-                        //     <label for="">Price</label>
-                        //     <span></span>
-                        //     `
-                        // );
+                        $('.modal-body').html('');
+                        $('.modal-body').append(
+                            `
+                            <div>
+                            <label for=""><strong>Shoe</strong></label><br>
+                            <span>`+data.shoe+`</span>
+                            </div>
+                            <br><br>
+                            <div>
+                            <label for=""><strong>Service</strong></label><br>
+                            <span>`+data.service+`</span>
+                            </div>
+                            `
+                        );
+                        $('#modal_show_order').modal('show');
                     }
                 });
             });

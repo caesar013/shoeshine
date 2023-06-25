@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Service;
 use App\Models\Shoe;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -49,13 +50,14 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function showOrder($transaction_id, $order_id)
+    public function showOrder($order_id)
     {
         $order = Order::where('id', '=', $order_id)->first();
-        $transaction = Transaction::where('id', '=', $transaction_id)->first();
+        $shoe = Shoe::where('id', '=', $order->shoe_id)->first();
+        $service = Service::where('id', '=', $order->service_id)->first();
         return response()->json([
-            'orders' => $order,
-            'shoes' => Shoe::where('id', '=', $order->id)->first()
+            'shoe' => $shoe->model." - ".$shoe->material,
+            'service' => $service->name." - ".$service->price
         ]);
     }
 
