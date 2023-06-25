@@ -26,9 +26,6 @@
                             <img src="{{ asset('argon/img/brand/logo.png') }}" class="navbar-brand-img "
                                 style="max-height: 100%; max-width: 100%;">
                         </a>
-                        {{-- <a href="{{ route('dashboard.home') }}">
-                            <img src="{{ asset('argon/img/brand/blue.png') }}">
-                        </a> --}}
                     </div>
                     <div class="col-6 collapse-close">
                         <button type="button" class="navbar-toggler" data-toggle="collapse"
@@ -40,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Navigation -->
+            <!-- Authorized Navigation -->
             @auth
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -53,7 +50,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('service') ? 'active' : '' }}"
-                            href="{{ route('service.showService') }}">
+                            href="{{ route('service.showServices') }}">
                             <i class="ni ni-briefcase-24 text-primary"></i>
                             {{ __('Services') }}
                         </a>
@@ -82,13 +79,44 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('article') }}">
+                        <a class="nav-link {{ Request::is('article*') ? 'active' : '' }}" href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
                     </li>
                 </ul>
+
+                @can('admin')
+                <h5 class="d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Administrator</span>
+                </h5>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('dashboard/admin/service*') ? 'active' : '' }}" href="{{ route('dashboard.admin.service.index') }}">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            {{ __('Services Control') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('dashboard/admin/shoe*') ? 'active' : '' }}" href="{{ route('dashboard.admin.shoe.index') }}">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            {{ __('Shoes Control') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('dashboard/admin/shoe*') ? 'active' : '' }}" href="{{ route('dashboard.admin.shoe.index') }}">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            {{ __('Transactions Control') }}
+                        </a>
+                    </li>
+
+
+                </ul>
+                @endcan
             @endauth
 
+            {{-- Guest Navigation --}}
             @guest
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -100,20 +128,20 @@
 
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('service') ? 'active' : '' }}"
-                            href="{{ route('service.showService') }}">
+                            href="{{ route('service.showServices') }}">
                             <i class="ni ni-briefcase-24 text-primary"></i>
                             {{ __('Services') }}
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="">
+                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="{{ route('testimony') }}">
                             <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('article') }}">
+                        <a class="nav-link {{ Request::is('article*') ? 'active' : '' }}" href="{{ route('article') }}">
                             <i class="ni ni-single-copy-04 text-primary"></i> {{ __('Articles') }}
                         </a>
                     </li>

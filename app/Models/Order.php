@@ -16,7 +16,7 @@ class Order extends Model
     ];
 
     public function shoe(){
-        return $this->belongsTo(Shoe::class, 'shoe_id'. 'id');
+        return $this->belongsTo(Shoe::class, 'shoe_id', 'id');
     }
 
     public function transaction(){

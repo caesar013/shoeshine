@@ -52,13 +52,12 @@ class ShoeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'errors' => $validator->messages()
+                'error' => $validator->messages()
             ]);
         } else {
             $s = Shoe::create($validator->validated());
             return response()->json([
                 'status' => true,
-                'shoe' => $validator->validated(),
                 'message' =>($s) ? 'Shoes added successfully':'Failed'
             ]);
         }
@@ -83,7 +82,7 @@ class ShoeController extends Controller
      */
     public function edit($id)
     {
-        $shoe = Shoe::find($id);
+        $shoe = Shoe::where('id', '=', $id);
         if ($shoe) {
             return response()->json([
                 'status' => true,
@@ -121,7 +120,7 @@ class ShoeController extends Controller
                 'error' => $validator->messages()
             ]);
         } else {
-            $s = Shoe::find($id);
+            $s = Shoe::where('id', '=', $id);
 
             if($s){
                 $s->update($validator->validated());
@@ -148,7 +147,7 @@ class ShoeController extends Controller
      */
     public function destroy($id)
     {
-        $s = Shoe::where('id','=',$id)->first();
+        $s = Shoe::where('id', '=', $id);
         if ($s) {
             $s->delete();
 

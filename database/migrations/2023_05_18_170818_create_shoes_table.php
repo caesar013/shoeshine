@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('material', 50);
             $table->string('color', 50);
             $table->string('model', 50);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

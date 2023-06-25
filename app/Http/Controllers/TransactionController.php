@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Shoe;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class TransactionController extends Controller
 {
     /**
@@ -15,7 +18,7 @@ class TransactionController extends Controller
     public function index()
     {
         return view('trans', [
-            'title' => 'Transaction'
+            'title' => 'Transactions'
         ]);
     }
 
@@ -46,9 +49,14 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function showOrder($transaction_id, $order_id)
     {
-        //
+        $order = Order::where('id', '=', $order_id)->first();
+        $transaction = Transaction::where('id', '=', $transaction_id)->first();
+        return response()->json([
+            'orders' => $order,
+            'shoes' => Shoe::where('id', '=', $order->id)->first()
+        ]);
     }
 
     /**
@@ -83,5 +91,26 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function fetchData()
+    {
+        $transactions = Transaction::where('user_id', '=', Auth::id())->get();
+
+        $output = [];
+
+        foreach ($transactions as $value) {
+            foreach ($value->order as $bar) {
+                $output[] = [
+                    'transaction_id' => $value->id,
+                    'order_id' => $bar->id,
+                    'tanggal' => $value->created_at->toDateString().", ".$value->created_at->diffForHumans(),
+                    'shoe' => $bar->shoe->brand." - ".$bar->shoe->color,
+                    'status' => $value->status->name
+                ];
+            }
+        }
+
+        return response()->json($output);
     }
 }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\Shoe;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -39,7 +39,7 @@ class OrderController extends Controller
     {
         return view('order', [
             'title' => 'Order',
-            'shoes' => Shoe::where('id', Auth::getUser()->id)->get(),
+            'shoes' => Shoe::where('user_id', Auth::getUser()->id)->get(),
             'services' => Service::all()
         ]);
     }
@@ -54,27 +54,32 @@ class OrderController extends Controller
     {
 
         $rules = [
+            'transaction_id' => 'nullable|exists:transactions,id',
             'shoe_id' => 'required|exists:shoes,id',
             'service_id' => 'required|exists:services,id'
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return redirect()->route('dashboard.order.create')
-            ->withErrors($validator)
-            ->withInput();
+            return response()->json([
+                'status' => false,
+                'error' => 'Data not valid'
+            ]);
         } else {
-            $transaction_id = DB::table('transactions')->insertGetId([
+            $trans = Transaction::create([
                 'user_id' => Auth::id()
             ]);
-            Order::create([
-                'shoe_id' => $request->input('shoe_id'),
-                'service_id' => $request->input('service_id'),
-                'transaction_id' => $transaction_id
+
+            $validated = $validator->validated();
+
+            $validated["transaction_id"] = $trans->id;
+
+            $or = Order::create($validated);
+
+            return response()->json([
+                'status' => true,
+                'message' => ($or) ? 'Order queued successfully' : "Failed"
             ]);
-
-            return redirect()->route('dashboard.order.index')->with('success', 'Data Order berhasil ditambahkan');
         }
-
     }
 
     /**
@@ -83,9 +88,9 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show( )
     {
-        //
+
     }
 
     /**

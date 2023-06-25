@@ -12,6 +12,6 @@ class STATUS extends Model
     protected $guarded = ['*'];
 
     public function transaction(){
-        return $this->belongsTo(Transaction::class, 'status', 'id');
+        return $this->hasMany(Transaction::class, 'status_id', 'id');
     }
 }

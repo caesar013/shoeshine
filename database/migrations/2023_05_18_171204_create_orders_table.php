@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Service;
-use App\Models\Shoe;
-use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

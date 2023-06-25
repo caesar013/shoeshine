@@ -12,7 +12,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'arrived',
-        'status',
+        'status_id',
     ];
 
     public function user(){
@@ -24,6 +24,6 @@ class Transaction extends Model
     }
 
     public function STATUS(){
-        return $this->hasMany(STATUS::class, 'status', 'id');
+        return $this->belongsTo(STATUS::class, 'status_id', 'id');
     }
 }

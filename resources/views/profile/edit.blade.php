@@ -34,7 +34,7 @@
                         </div>
                         <div class="text-center">
                             <h3>
-                                {{ auth()->user()->name }}<span class="font-weight-light">, (age)</span>
+                                {{ auth()->user()->name }}<span class="font-weight-light">, ( {{ (date('Y') - date('Y', strtotime(auth()->user()->birthdate)) ) }} )</span>
                             </h3>
                             <div class="h5 font-weight-300">
                                 <i class="ni location_pin mr-2"></i>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="" autocomplete="off">
+                        <form method="post" action="{{ route('dashboard.profile.update', Auth::id()) }}" autocomplete="off">
                             @csrf
                             @method('put')
 
@@ -121,7 +121,7 @@
                                     <label class="form-control-label" for="input-gender">{{ __('Gender') }}</label>
                                     <input type="text" name="gender" id="input-gender"
                                         class="form-control form-control-alternative{{ $errors->has('gender') ? ' is-invalid' : '' }}"
-                                        placeholder="{{ __('Gender') }}" value="{{ old('gender', auth()->user()->gender) }}"
+                                        placeholder="{{ __('Gender(l/p)') }}" value="{{ old('gender', auth()->user()->gender) }}"
                                         required autofocus>
 
                                     @if ($errors->has('gender'))
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>

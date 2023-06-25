@@ -152,12 +152,12 @@
                     url: "{{ route('dashboard.fetchDataShoes') }}",
                     dataType: "json",
                     success: function(data) {
-                        $('#modal_add_shoesLabel').html('Add Student');
+                        $('#modal_add_shoesLabel').html('Add Shoes');
                         $('tbody').html("");
                         $.each(data.shoes, function(key, item) {
                             $('tbody').append(`
                                 <tr>
-                                    <td>` + item.id + `</td>
+                                    <td>` + (key +1 ) + `</td>
                                     <td>` + item.brand + `</td>
                                     <td>` + item.color + `</td>
                                     <td>` + item.material + `</td>
@@ -182,7 +182,7 @@
                 $('#modal_delete_shoes').modal('show');
             });
 
-            $(document).on('click', '.proceed_delete_bu', function(e) {
+            $(document).on('click', '.proceed_delete_shoe', function(e) {
                 e.preventDefault();
                 let shoe_id = $('#delete_id').val();
 
@@ -286,7 +286,7 @@
                         if (response.status) {
                             $('#success').addClass('alert alert-success');
                             $('#success').text(response.message);
-                            $('#modal_add_shoes').modal('hide');
+                            $('#modal_add_shoes').modal("hide");
                             fetch();
                         } else {
                             $('#errorAdd').addClass('alert alert-danger');

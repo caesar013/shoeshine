@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -55,9 +56,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($user_id)
     {
-        //
+        return view('profile.edit');
     }
 
     /**
@@ -67,9 +68,33 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,  $user_id)
     {
-        //
+        $rules = [
+            'id' => 'unique:users,id,'.$user_id,
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'gender' => 'required|in:l,p|string|max:1',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'birthdate' => 'required|date'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->route('dashboard.profile.edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user = User::where('id', $user_id)->update($validator->validated());
+
+        if ($user) {
+            session(['status' => 'Berhasil Update']);
+            return view('profile.edit');
+        }
     }
 
     /**
