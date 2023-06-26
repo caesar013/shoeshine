@@ -3,6 +3,7 @@
 @section('content')
     @include('layouts.headers.cards')
 
+    <div id="success"></div>
     <div class="container-fluid mt-3">
         <div class="table-responsive">
             <div>
@@ -26,8 +27,8 @@
     </div>
 
     <!-- Show Transaction Modal -->
-    <div class="modal fade" id="modal_show_transaction" tabindex="-1" role="dialog" aria-labelledby="modal_show_transactionLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modal_show_transaction" tabindex="-1" role="dialog"
+        aria-labelledby="modal_show_transactionLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,8 +51,8 @@
     <!--End- Show Transaction Modal -->
 
     {{-- Edit Transaction Modal --}}
-    <div class="modal fade" id="modal_edit_transaction" tabindex="-1" role="dialog" aria-labelledby="modal_show_transactionLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modal_edit_transaction" tabindex="-1" role="dialog"
+        aria-labelledby="modal_show_transactionLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,7 +72,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    <button type="button" class="btn btn-primary update_transaction" data-dismiss="modal"
                         onclick="closeModal('modal_edit_transaction')">OK</button>
                 </div>
             </div>
@@ -157,8 +158,7 @@
                 });
             });
 
-            $(document).on('click', '.edit_transaction', function(e)
-            {
+            $(document).on('click', '.edit_transaction', function(e) {
                 e.preventDefault();
                 var transaction_id = $(this).attr('data-transaction_id');
                 var order_id = $(this).attr('data-order_id');
@@ -166,15 +166,16 @@
                 $('#modal_edit_transaction').modal('show');
                 $.ajax({
                     type: 'GET',
-                    url: '/dashboard/admin/transaction/'+transaction_id+'/edit',
+                    url: '/dashboard/admin/transaction/' + transaction_id + '/edit',
                     dataType: "json",
                     success: function(response) {
                         if (response.status) {
-                            console.log(response.status_transaction);
-                            $.each(response.status_choices, function (foo, bar) {
-                                $('#edit_status_id').append(`<option value="`+bar.id+`">`+bar.name+`</option>`);
+                            $.each(response.status_choices, function(foo, bar) {
+                                $('#edit_status_id').append(`<option value="` + bar.id +
+                                    `">` + bar.name + `</option>`);
                             })
                             $('#edit_id').val(transaction_id);
+                            $('#edit_status_id').val(response.status_id);
                         } else {
                             $('#errorEdit').html('');
                             $('#errorEdit').addClass('alert alert-danger');
@@ -184,6 +185,34 @@
                 });
             });
 
+            $(document).on('click', '.update_transaction', function(e) {
+                e.preventDefault();
+                var transaction_id = $('#edit_id').val();
+                var status_id = $('#edit_status_id').val();
+                var data_trans = {
+                    'status_id': status_id,
+                    'transaction_id': transaction_id
+                };
+                $.ajax({
+                    type: 'PUT',
+                    url: '/dashboard/admin/transaction/'+transaction_id,
+                    data: data_trans,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            $('#success').html('');
+                            $('#success').addClass('alert alert-success');
+                            $('#success').text(response.message);
+                            $('#modal_edit_shoes').modal('hide');
+                            fetch();
+                        } else {
+                            $('#sucess').html('');
+                            $('#sucess').addClass('alert alert-danger');
+                            $('#sucess').text(response.error);
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

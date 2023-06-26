@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\STATUS;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminTransactionController extends Controller
 {
@@ -67,7 +68,8 @@ class AdminTransactionController extends Controller
             return response()->json([
                 'status' => true,
                 'status_choices' => $status,
-                'status_transaction' => $transaction->status_id
+                'status_transaction' => $transaction->status_id,
+                'status_id' => $transaction->status_id
             ]);
         } else {
             return response()->json([
@@ -85,9 +87,34 @@ class AdminTransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $transaction_id)
     {
-        //
+        $rules= [
+            'id' => 'unique:transactions,id,'.$transaction_id,
+            'status_id' => 'required|exists:status,id'
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Failed in validation => '.$validator->messages()
+            ]);
+        } else {
+            $transaction = Transaction::where('id', '=', $transaction_id)->first();
+            if ($transaction) {
+                $transaction->update($validator->validated());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data Updated Successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => 'No transaction Found'
+                ]);
+            }
+        }
+
     }
 
     /**
