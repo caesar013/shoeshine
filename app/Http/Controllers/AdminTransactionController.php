@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\Service;
-use App\Models\Shoe;
+use App\Models\STATUS;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-class TransactionController extends Controller
+
+class AdminTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('trans', [
-            'title' => 'Transactions'
+        return view('admin.transaction', [
+            'title' => "Admin Transaction"
         ]);
     }
 
@@ -49,15 +47,9 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function showOrder($order_id)
+    public function show(Transaction $transaction)
     {
-        $order = Order::where('id', '=', $order_id)->first();
-        $shoe = Shoe::where('id', '=', $order->shoe_id)->first();
-        $service = Service::where('id', '=', $order->service_id)->first();
-        return response()->json([
-            'shoe' => $shoe->model." - ".$shoe->material,
-            'service' => $service->name." - ".$service->price
-        ]);
+        //
     }
 
     /**
@@ -66,9 +58,24 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($transaction_id)
     {
-        //
+        $transaction = Transaction::with('order')->where('id', '=', $transaction_id)->first();
+        $status = STATUS::all();
+
+        if ($transaction) {
+            return response()->json([
+                'status' => true,
+                'status_choices' => $status,
+                'status_transaction' => $transaction->status_id
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'error' => 'Error with the ID'
+            ]);
+        }
+
     }
 
     /**
@@ -96,17 +103,18 @@ class TransactionController extends Controller
 
     public function fetchData()
     {
-        $transactions = Transaction::where('user_id', '=', Auth::id())->get();
+        $transactions = Transaction::all();
 
         $output = [];
 
         foreach ($transactions as $value) {
-            foreach ($value->order as $bar) {
+            foreach ($value->order as $order) {
                 $output[] = [
+                    'user' => $value->user->username." - ".$value->user->name,
                     'transaction_id' => $value->id,
-                    'order_id' => $bar->id,
+                    'order_id' => $order->id,
                     'tanggal' => $value->created_at->toDateString().", ".$value->created_at->diffForHumans(),
-                    'shoe' => $bar->shoe->brand." - ".$bar->shoe->color,
+                    'shoe' => $order->shoe->brand." - ".$order->shoe->color,
                     'status' => $value->status->name
                 ];
             }

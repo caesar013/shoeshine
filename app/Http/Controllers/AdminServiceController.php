@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shoe;
+use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ShoeController extends Controller
+class AdminServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class ShoeController extends Controller
      */
     public function index()
     {
-        return view('shoe', [
-            'title' => 'Shoe'
+        return view('admin.service', [
+            'title' => 'Service Admin'
         ]);
     }
 
@@ -39,13 +38,9 @@ class ShoeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['user_id' => Auth::getUser()->id]);
         $rules = [
-            'user_id' => 'exists:users,id',
-            'material' => 'required|string|max:50',
-            'color' => 'required|string|max:50',
-            'model' => 'required|string|max:50',
-            'brand' => 'required|string|max:50',
+            'name' => 'required|string|max:50',
+            'price' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -55,21 +50,22 @@ class ShoeController extends Controller
                 'error' => $validator->messages()
             ]);
         } else {
-            $s = Shoe::create($validator->validated());
+            $serv = Service::create($validator->validated());
             return response()->json([
                 'status' => true,
-                'message' =>($s) ? 'Shoes added successfully':'Failed'
+                'message' => ($serv) ? 'Service added successfully' : "Failed"
             ]);
         }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(shoe $shoe)
+    public function show(Service $service)
     {
         //
     }
@@ -77,40 +73,39 @@ class ShoeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $shoe = Shoe::where('id', '=', $id)->first();
-        if ($shoe) {
+        $service = Service::find($id);
+        if ($service) {
             return response()->json([
                 'status' => true,
-                'shoe' => $shoe
+                'service' => $service
             ]);
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'Shoes not Found'
+                'message' => 'Service not Found'
             ]);
         }
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $service_id)
     {
         $rules = [
-            'id' => 'unique:shoes,id,' . $id,
-            'material' => 'required|string|max:50',
-            'color' => 'required|string|max:50',
-            'model' => 'required|string|max:50',
-            'brand' => 'required|string|max:50',
+            'id' => 'required|unique:services,id,'.$service_id,
+            'name' => 'required|string|max:50',
+            'price' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -120,19 +115,19 @@ class ShoeController extends Controller
                 'error' => $validator->messages()
             ]);
         } else {
-            $s = Shoe::where('id', '=', $id);
+            $serv = Service::find($service_id);
 
-            if($s){
-                $s->update($validator->validated());
+            if ($serv) {
+                $serv->update($validator->validated());
 
                 return response()->json([
                     'status' => true,
-                    'message' => ($s) ? 'Data updated successfully' : 'Failed'
+                    'message' => ($serv) ? 'Service updated successfully' : 'Failed'
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'error' => "Shoes not found"
+                    'error' => 'Service not Found'
                 ]);
             }
 
@@ -142,35 +137,31 @@ class ShoeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($service_id)
     {
-        $s = Shoe::where('id', '=', $id);
-        if ($s) {
-            $s->delete();
+        $serv = Service::find($service_id);
+        if ($serv) {
+            $serv->delete();
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data removed successfully'
+                'message' => 'Service Removed'
             ]);
         } else {
             return response()->json([
                 'status' => false,
-                'error' => 'Shoes not Found'
+                'error' => 'Service not Found'
             ]);
         }
 
-
-
     }
 
-    public function fetchData()
-    {
-        $shoes = Shoe::where('user_id', Auth::getUser()->id)->get();
+    public function fetchData(){
         return response()->json([
-            'shoes' => $shoes
+            'services' => Service::all()
         ]);
     }
 }

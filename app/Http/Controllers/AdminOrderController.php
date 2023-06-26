@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\Shoe;
-use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-class OrderController extends Controller
+class AdminOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,9 +27,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order', [
-            'title' => 'Order',
-            'shoes' => Shoe::where('user_id', Auth::getUser()->id)->get(),
+        return view('admin.order', [
+            'title' => 'Admin Order',
+            'users' => User::all(),
             'services' => Service::all()
         ]);
     }
@@ -44,34 +42,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-
-        $rules = [
-            'transaction_id' => 'nullable|exists:transactions,id',
-            'shoe_id' => 'required|exists:shoes,id',
-            'service_id' => 'required|exists:services,id'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'error' => 'Data not valid'
-            ]);
-        } else {
-            $trans = Transaction::create([
-                'user_id' => Auth::id()
-            ]);
-
-            $validated = $validator->validated();
-
-            $validated["transaction_id"] = $trans->id;
-
-            $or = Order::create($validated);
-
-            return response()->json([
-                'status' => true,
-                'message' => ($or) ? 'Order queued successfully' : "Failed"
-            ]);
-        }
+        //
     }
 
     /**
@@ -80,9 +51,9 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show( )
+    public function show(Order $order)
     {
-
+        //
     }
 
     /**
@@ -117,5 +88,15 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function fetchShoes(Request $request)
+    {
+        $user_id = $request->data_id;
+        $shoes = Shoe::where('user_id', '=', $user_id)->get();
+
+        return response()->json([
+            'shoes' => $shoes
+        ]);
     }
 }

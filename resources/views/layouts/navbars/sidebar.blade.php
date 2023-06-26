@@ -56,6 +56,7 @@
                         </a>
                     </li>
 
+                    @cannot('admin')
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('dashboard/shoe*') ? 'active' : '' }}"
                             href="{{ route('dashboard.shoe.index') }}">
@@ -64,16 +65,18 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/order*') ? 'active' : '' }}"
-                            href="{{ route('dashboard.order.create') }}">
-                            <i class="ni ni-delivery-fast text-primary"></i>
-                            {{ __('Order') }}
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/order*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.order.create') }}">
+                                <i class="ni ni-delivery-fast text-primary"></i>
+                                {{ __('Order') }}
+                            </a>
+                        </li>
+                    @endcannot
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="{{ route('testimony') }}">
+                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}"
+                            href="{{ route('testimony') }}">
                             <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>
@@ -86,33 +89,44 @@
                 </ul>
 
                 @can('admin')
-                <h5 class="d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Administrator</span>
-                </h5>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/admin/service*') ? 'active' : '' }}" href="{{ route('dashboard.admin.service.index') }}">
-                            <i class="ni ni-tv-2 text-primary"></i>
-                            {{ __('Services Control') }}
-                        </a>
-                    </li>
+                    <h5 class="d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Administrator</span>
+                    </h5>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/order*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.admin.order.create') }}">
+                                <i class="ni ni-tv-2 text-primary"></i>
+                                {{ __('Create Orders') }}
+                            </a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/admin/shoe*') ? 'active' : '' }}" href="{{ route('dashboard.admin.shoe.index') }}">
-                            <i class="ni ni-tv-2 text-primary"></i>
-                            {{ __('Shoes Control') }}
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/admin/service*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.admin.service.index') }}">
+                                <i class="ni ni-tv-2 text-primary"></i>
+                                {{ __('Services Control') }}
+                            </a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/admin/shoe*') ? 'active' : '' }}" href="{{ route('dashboard.admin.shoe.index') }}">
-                            <i class="ni ni-tv-2 text-primary"></i>
-                            {{ __('Transactions Control') }}
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/admin/shoe*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.admin.shoe.index') }}">
+                                <i class="ni ni-tv-2 text-primary"></i>
+                                {{ __('Shoes Control') }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/admin/transaction*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.admin.transaction.index') }}">
+                                <i class="ni ni-tv-2 text-primary"></i>
+                                {{ __('Transactions Control') }}
+                            </a>
+                        </li>
 
 
-                </ul>
+                    </ul>
                 @endcan
             @endauth
 
@@ -135,7 +149,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}" href="{{ route('testimony') }}">
+                        <a class="nav-link {{ Request::is('testimony') ? 'active' : '' }}"
+                            href="{{ route('testimony') }}">
                             <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Testimonials') }}
                         </a>
                     </li>

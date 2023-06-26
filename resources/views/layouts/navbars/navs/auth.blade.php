@@ -25,10 +25,12 @@
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
+                    @cannot('admin')
                     <a href="{{ route('dashboard.transaction.index') }}" class="dropdown-item">
                         <i class="ni ni-money-coins"></i>
                         <span>{{ __('My transactions') }}</span>
                     </a>
+                    @endcannot
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('dashboard.logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">

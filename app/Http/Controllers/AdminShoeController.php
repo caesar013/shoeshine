@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shoe;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ShoeController extends Controller
+class AdminShoeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class ShoeController extends Controller
      */
     public function index()
     {
-        return view('shoe', [
-            'title' => 'Shoe'
+        return view('admin.shoe', [
+            'title' => 'Admin Shoes',
+            'users' => User::all()
         ]);
     }
 
@@ -39,7 +40,6 @@ class ShoeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['user_id' => Auth::getUser()->id]);
         $rules = [
             'user_id' => 'exists:users,id',
             'material' => 'required|string|max:50',
@@ -66,10 +66,10 @@ class ShoeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Shoe  $shoe
      * @return \Illuminate\Http\Response
      */
-    public function show(shoe $shoe)
+    public function show(Shoe $shoe)
     {
         //
     }
@@ -77,12 +77,12 @@ class ShoeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Shoe  $shoe
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($shoe_id)
     {
-        $shoe = Shoe::where('id', '=', $id)->first();
+        $shoe = Shoe::where('id', '=', $shoe_id)->first();
         if ($shoe) {
             return response()->json([
                 'status' => true,
@@ -100,13 +100,13 @@ class ShoeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Shoe  $shoe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
         $rules = [
-            'id' => 'unique:shoes,id,' . $id,
+            'id' => 'unique:shoes,id,' . $user_id,
             'material' => 'required|string|max:50',
             'color' => 'required|string|max:50',
             'model' => 'required|string|max:50',
@@ -120,7 +120,7 @@ class ShoeController extends Controller
                 'error' => $validator->messages()
             ]);
         } else {
-            $s = Shoe::where('id', '=', $id);
+            $s = Shoe::where('id', '=', $user_id);
 
             if($s){
                 $s->update($validator->validated());
@@ -135,19 +135,18 @@ class ShoeController extends Controller
                     'error' => "Shoes not found"
                 ]);
             }
-
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\shoe  $shoe
+     * @param  \App\Models\Shoe  $shoe
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($shoe_id)
     {
-        $s = Shoe::where('id', '=', $id);
+        $s = Shoe::where('id', '=', $shoe_id);
         if ($s) {
             $s->delete();
 
@@ -161,16 +160,27 @@ class ShoeController extends Controller
                 'error' => 'Shoes not Found'
             ]);
         }
-
-
-
     }
 
     public function fetchData()
     {
-        $shoes = Shoe::where('user_id', Auth::getUser()->id)->get();
-        return response()->json([
-            'shoes' => $shoes
-        ]);
+        $users = User::all();
+        $output = [];
+
+        foreach ($users as $user) {
+            if ($user->shoe) {
+                foreach ($user->shoe as $s) {
+                    $output[] = [
+                        'user' => $user->username." - ".$user->name,
+                        'shoe_brand' => $s->brand,
+                        'shoe_color' => $s->color,
+                        'shoe_material' => $s->material,
+                        'shoe_model' => $s->model,
+                        'shoe_id' => $s->id
+                    ];
+                }
+            }
+        }
+        return response()->json($output);
     }
 }
