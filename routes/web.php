@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -82,6 +83,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::post('/order/fetchShoes', [AdminOrderController::class, 'fetchShoes'])->name('order.fetchShoes');
 
         Route::resource('/transaction', AdminTransactionController::class);
+
+        Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 
     });
 });

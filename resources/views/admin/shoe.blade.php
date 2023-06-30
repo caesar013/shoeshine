@@ -24,16 +24,16 @@
                             @endforeach
                         </select>
                         <label for="brand">Brand</label>
-                        <input type="text" class="brand form-control" id="brand" value="{{ old('brand') }}"
+                        <input type="text" class="brand form-control" id="brand" value=""
                             required>
                         <label for="color">Color</label>
-                        <input type="text" class="color form-control" id="color" value="{{ old('color') }}"
+                        <input type="text" class="color form-control" id="color" value=""
                             required>
                         <label for="model">Model</label>
-                        <input type="text" class="model form-control" id="model" value="{{ old('model') }}"
+                        <input type="text" class="model form-control" id="model" value=""
                             required>
                         <label for="material">Material</label>
-                        <input type="text" class="material form-control" id="material" value="{{ old('material') }}"
+                        <input type="text" class="material form-control" id="material" value=""
                             required>
                     </div>
                 </div>
@@ -135,6 +135,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- handled by ajax --}}
                             </tbody>
                         </table>
                     </div>
@@ -149,10 +150,6 @@
         function closeModal(idModal) {
             $("#" + idModal).modal("hide");
         }
-
-        // function openModal(idModal) {
-        //     $('#'+ idModal).modal('show');
-        // }
 
         $(document).ready(function() {
 

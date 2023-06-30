@@ -53,9 +53,9 @@
                         <button type="button" class="btn btn-primary ml-3 add_order_btn" style="color: #f4f5f7"><b>+ Add
                                 New Order</b></button>
                     </div>
-                    <div class="form-group ">
+                    {{-- <div class="form-group ">
                         <button type="button" class="btn btn-success ml-3" style="color: #f4f5f7"><b>Submit</b></button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

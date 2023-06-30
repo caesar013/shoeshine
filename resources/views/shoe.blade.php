@@ -18,16 +18,16 @@
                     <div id="errorAdd"></div>
                     <div class="form-group mb-3">
                         <label for="brand">Brand</label>
-                        <input type="text" class="brand form-control" id="brand" value="{{ old('brand') }}"
+                        <input type="text" class="brand form-control" id="brand" value=""
                             required>
                         <label for="color">Color</label>
-                        <input type="text" class="color form-control" id="color" value="{{ old('color') }}"
+                        <input type="text" class="color form-control" id="color" value=""
                             required>
                         <label for="model">Model</label>
-                        <input type="text" class="model form-control" id="model" value="{{ old('model') }}"
+                        <input type="text" class="model form-control" id="model" value=""
                             required>
                         <label for="material">Material</label>
-                        <input type="text" class="material form-control" id="material" value="{{ old('material') }}"
+                        <input type="text" class="material form-control" id="material" value=""
                             required>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
                         if (response.status) {
                             $('#success').addClass('alert alert-success');
                             $('#success').text(response.message);
-                            $('#modal_add_shoes').modal("hide");
+                            closeModal("modal_add_shoes");
                             fetch();
                         } else {
                             $('#errorAdd').addClass('alert alert-danger');

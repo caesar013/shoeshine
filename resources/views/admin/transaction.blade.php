@@ -170,6 +170,7 @@
                     dataType: "json",
                     success: function(response) {
                         if (response.status) {
+                            $("#edit_status_id").html("");
                             $.each(response.status_choices, function(foo, bar) {
                                 $('#edit_status_id').append(`<option value="` + bar.id +
                                     `">` + bar.name + `</option>`);
@@ -213,6 +214,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endsection

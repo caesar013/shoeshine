@@ -125,7 +125,13 @@
                             </a>
                         </li>
 
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('dashboard/admin/report*') ? 'active' : '' }}"
+                                href="{{ route('dashboard.admin.report.index') }}">
+                                <i class="ni ni-tv-2 text-primary"></i>
+                                {{ __('Report') }}
+                            </a>
+                        </li>
                     </ul>
                 @endcan
             @endauth

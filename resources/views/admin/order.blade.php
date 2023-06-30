@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="shoe" class="form-control-label ml-3 mt-3">Shoe</label>
-                <select class="form-control ml-3" type="text" id="shoe" style="width: 1158px">
+                <select class="form-control ml-3 " type="text" id="shoe" style="width: 1158px">
 
                 </select>
             </div>
@@ -52,9 +52,9 @@
                         <button type="button" class="btn btn-primary ml-3 add_order_btn" style="color: #f4f5f7"><b>+ Add
                                 New Order</b></button>
                     </div>
-                    <div class="form-group ">
+                    {{-- <div class="form-group ">
                         <button type="button" class="btn btn-success ml-3" style="color: #f4f5f7"><b>Submit</b></button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -63,29 +63,35 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        jQuery(document).ready(function() {
 
-            $('#user').on('change', function(e)
-            {
+            $('#shoe').select2();
+
+            $('#user').on('change', function(e) {
                 var user_id = e.target.value;
                 $.ajax({
-                    type: 'POST',
-                    url: '{{ route('dashboard.admin.order.fetchShoes') }}',
-                    data: {data_id:user_id},
-                    success: function(response)
-                    {
+                    type: "POST",
+                    url: "{{ route('dashboard.admin.order.fetchShoes') }}",
+                    data: {
+                        data_id: user_id
+                    },
+                    success: function(response) {
                         if (response.shoes) {
                             $('#shoe').empty();
-                            $.each(response.shoes, function(foo, bar)
-                            {
-                                $('#shoe').append('<option value="'+ bar.id + '">'+bar.brand+' - '+bar.color+'</option>');
+                            $.each(response.shoes, function(foo, bar) {
+                                $('#shoe').append('<option value="' + bar.id +
+                                    '">' + bar.brand + ' - ' + bar.color +
+                                    '</option>');
                             });
                         } else {
-                            $('#shoe').append('<option value="">No Shoes Found for this user</option>');
+                            $('#shoe').append(
+                                '<option value="">No Shoes Found for this user</option>'
+                            );
                         }
                     }
                 });
             });
+
 
             $(document).on('click', '.add_order_btn', function(e) {
                 e.preventDefault();
@@ -114,6 +120,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endsection
