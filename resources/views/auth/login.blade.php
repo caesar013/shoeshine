@@ -25,10 +25,9 @@
                 @csrf
                 <h1 class="m-3">Sign in</h1>
                 @if (session('success'))
-                        <p class="m-1">{{ session('success') }} </p>
+                <p class="m-1">{{ session('success') }} </p>
                 @endif
-                <input type="text" placeholder="Username" name="username" class="form-control" autofocus required
-                    value="{{ old('name') }}">
+                <input type="text" placeholder="Username" name="username" class="form-control" autofocus required value="{{ old('username') }}">
                 <input type="password" placeholder="Password" name="password" class="form-control" required>
                 <a href="">Forgot your password?</a>
                 <button type="submit">Sign In</button>
